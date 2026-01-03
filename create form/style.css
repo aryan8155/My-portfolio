@@ -86,6 +86,11 @@ nav {
 .hero h3 { font-size: 1.5rem; color: var(--primary-color); }
 .hero p { max-width: 600px; color: #64748b; margin-bottom: 2rem; }
 
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+}
+
 .btn {
     padding: 0.8rem 2rem;
     border-radius: 8px;
@@ -94,10 +99,11 @@ nav {
     transition: var(--transition);
     display: inline-block;
     cursor: pointer;
+    min-height: 44px; /* Better touch target for mobile */
 }
 
 .btn.primary { background: var(--primary-color); color: white; border: none; }
-.btn.secondary { border: 2px solid var(--primary-color); color: var(--primary-color); margin-left: 1rem; }
+.btn.secondary { border: 2px solid var(--primary-color); color: var(--primary-color); margin-left: 1rem; background: transparent; }
 .btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
 /* --- Sections --- */
@@ -129,6 +135,45 @@ section { padding: 80px 0; }
 
 .project-card:hover { transform: translateY(-10px); border-color: var(--primary-color); }
 
+.project-img {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.project-info h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.project-info p {
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.project-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--card-bg);
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+footer p {
+    color: var(--text-color);
+    margin: 0;
+}
+
 /* --- Forms --- */
 form { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto; }
 input, textarea {
@@ -137,6 +182,19 @@ input, textarea {
     border: 1px solid var(--border-color);
     color: var(--text-color);
     border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#form-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
 }
 
 /* --- Reveal Animation --- */
@@ -144,19 +202,220 @@ input, textarea {
 .reveal.active { opacity: 1; transform: translateY(0); }
 
 /* --- Responsive --- */
+
+/* Large tablets and small desktops (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 900px;
+        padding: 0 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* Tablets (max-width: 768px) */
 @media (max-width: 768px) {
-    .menu-toggle { display: block; }
+    .container {
+        padding: 0 1.2rem;
+    }
+    
+    .menu-toggle { 
+        display: block;
+        color: var(--text-color);
+    }
+    
     .nav-links {
         position: absolute;
         top: 70px;
         right: -100%;
         flex-direction: column;
-        background: var(--bg-color);
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
         width: 100%;
         padding: 2rem;
         transition: 0.4s;
         border-bottom: 1px solid var(--border-color);
+        gap: 1.5rem;
     }
-    .nav-links.active { right: 0; }
-    .hero h1 { font-size: 2.5rem; }
+    
+    .nav-links.active { 
+        right: 0; 
+    }
+    
+    #theme-btn {
+        margin-top: 1rem;
+    }
+    
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 100px;
+    }
+    
+    .hero h1 { 
+        font-size: 2.8rem;
+    }
+    
+    .hero h3 {
+        font-size: 1.3rem;
+    }
+    
+    .hero p {
+        font-size: 0.95rem;
+    }
+    
+    .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .btn.secondary {
+        margin-left: 0;
+    }
+    
+    .btn {
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+    
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .about-text {
+        text-align: center;
+    }
+    
+    form {
+        max-width: 100%;
+    }
+}
+
+/* Mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    nav {
+        height: 60px;
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .menu-toggle {
+        font-size: 1.3rem;
+    }
+    
+    .nav-links {
+        top: 60px;
+        padding: 1.5rem;
+    }
+    
+    .hero {
+        padding-top: 80px;
+    }
+    
+    .hero h5 {
+        font-size: 0.9rem;
+    }
+    
+    .hero h1 { 
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    
+    .hero h3 {
+        font-size: 1.1rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    section {
+        padding: 50px 0;
+    }
+    
+    .skill-tag {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        margin: 0.3rem;
+    }
+    
+    .project-card {
+        padding: 1.5rem;
+    }
+    
+    .project-img {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    input, textarea {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+    
+    form {
+        gap: 0.8rem;
+    }
+}
+
+/* Extra small devices (max-width: 320px) */
+@media (max-width: 320px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero h3 {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
 }
