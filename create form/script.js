@@ -82,10 +82,11 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const msg = document.getElementById('form-message');
     msg.innerHTML = "Processing...";
+    msg.classList.add('show');
     
     // Simulate API call
     setTimeout(() => {
-        msg.innerHTML = "Success! Thank you for reaching out, Aryan will contact you soon.";
+        msg.innerHTML = "✓ Success! Thank you for reaching out, Aryan will contact you soon.";
         msg.style.color = "#0ea5e9";
         this.reset();
     }, 2000);
