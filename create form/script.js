@@ -76,18 +76,75 @@ function reveal() {
 }
 
 window.addEventListener('scroll', reveal);
+reveal();
 
-// 5. Simple Form Handling
-document.getElementById('contact-form').addEventListener('submit', function(e) {
+// 5. Contact Form with EmailJS
+const EMAILJS_CONFIG = {
+    publicKey: 'n3Jep_eUlAhWjmDEx',
+    serviceId: 'service_p8iz7uv',
+    templateId: 'template_lehn11b'
+};
+
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+const submitBtn = contactForm.querySelector('.btn-submit');
+const submitBtnHtml = submitBtn.innerHTML;
+
+function setFormMessage(text, type) {
+    formMessage.textContent = text;
+    formMessage.className = '';
+    formMessage.classList.add('show', type);
+}
+
+function isEmailJsConfigured() {
+    return !Object.values(EMAILJS_CONFIG).some(value => value.startsWith('YOUR_'));
+}
+
+if (window.emailjs) {
+    emailjs.init({
+        publicKey: EMAILJS_CONFIG.publicKey
+    });
+}
+
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const msg = document.getElementById('form-message');
-    msg.innerHTML = "Processing...";
-    msg.classList.add('show');
-    
-    // Simulate API call
-    setTimeout(() => {
-        msg.innerHTML = "✓ Success! Thank you for reaching out, Aryan will contact you soon.";
-        msg.style.color = "#0ea5e9";
-        this.reset();
-    }, 2000);
+
+    if (!window.emailjs) {
+        setFormMessage('Email service load nahi hui. Internet check karke dubara try karo.', 'error');
+        return;
+    }
+
+    if (!isEmailJsConfigured()) {
+        setFormMessage('EmailJS keys set nahi hain. script.js mein publicKey, serviceId, templateId update karo.', 'error');
+        return;
+    }
+
+    const templateParams = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        subject: document.getElementById('subject').value.trim(),
+        message: document.getElementById('message').value.trim(),
+        submitted_at: new Date().toLocaleString('en-IN')
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    setFormMessage('Message bheja ja raha hai...', 'info');
+
+    try {
+        await emailjs.send(
+            EMAILJS_CONFIG.serviceId,
+            EMAILJS_CONFIG.templateId,
+            templateParams
+        );
+
+        setFormMessage('Success! Message send ho gaya. Main jaldi reply karunga.', 'success');
+        contactForm.reset();
+    } catch (error) {
+        setFormMessage('Oops! Message send nahi ho paya. Thodi der baad phir try karo.', 'error');
+        console.error('EmailJS Error:', error);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtnHtml;
+    }
 });

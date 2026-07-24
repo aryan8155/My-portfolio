@@ -33,14 +33,43 @@
     <main>
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="container hero-content">
-                <h5>Hello, I'm</h5>
-                <h1>Aryan</h1>
-                <h3>I am a <span class="typing-text"></span></h3>
-                <p>I build high-performance, responsive, and beautiful web interfaces.</p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn primary">View My Work</a>
-                    <a href="#contact" class="btn secondary">Get In Touch</a>
+            <div class="container hero-layout">
+                <div class="hero-content">
+                    <h5>Hello, I'm</h5>
+                    <h1>Aryan</h1>
+                    <h3>I am a <span class="typing-text"></span></h3>
+                    <p>I build high-performance, responsive, and beautiful web interfaces.</p>
+                    <div class="hero-highlights">
+                        <span>Fast Delivery</span>
+                        <span>Responsive Design</span>
+                        <span>Clean UI</span>
+                    </div>
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn primary">View My Work</a>
+                        <a href="#contact" class="btn secondary">Get In Touch</a>
+                    </div>
+                    <div class="hero-metrics">
+                        <div>
+                            <strong>10+</strong>
+                            <p>Projects Built</p>
+                        </div>
+                        <div>
+                            <strong>100%</strong>
+                            <p>Mobile Friendly</p>
+                        </div>
+                        <div>
+                            <strong>24h</strong>
+                            <p>Reply Time</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual reveal">
+                    <div class="profile-card">
+                        <img src="imageself.png" alt="Aryan profile" class="profile-photo">
+                        <div class="profile-badge">
+                            <i class="fas fa-circle"></i> Available for Freelance
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -50,8 +79,12 @@
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-flex">
+                    <div class="about-photo-wrap">
+                        <img src="imageself.png" alt="Aryan working profile" class="about-photo">
+                    </div>
                     <div class="about-text">
                         <p>I am a passionate <strong>Frontend Developer</strong> based in India. I specialize in turning complex problems into simple, beautiful, and intuitive designs. With expertise in modern web technologies, I create responsive, high-performance web applications that delight users.</p>
+                        <p>I focus on writing clean code, crafting modern UI, and delivering smooth user experience across devices.</p>
                         <div class="skills">
                             <span class="skill-tag">HTML5</span>
                             <span class="skill-tag">CSS3</span>
@@ -107,15 +140,19 @@ This project helped me understand real-world website structure and layout design
                         <form id="contact-form">
                             <div class="form-group">
                                 <label for="name"><i class="fas fa-user"></i> Name</label>
-                                <input type="text" id="name" placeholder="Your Full Name" required>
+                                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                                <input type="email" id="email" placeholder="your@email.com" required>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject"><i class="fas fa-pen"></i> Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Project Collaboration" required>
                             </div>
                             <div class="form-group">
                                 <label for="message"><i class="fas fa-message"></i> Message</label>
-                                <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
                             </div>
                             <button type="submit" class="btn primary btn-submit">
                                 <i class="fas fa-paper-plane"></i> Send Message
@@ -131,6 +168,9 @@ This project helped me understand real-world website structure and layout design
     <footer>
         <p>&copy; 2025 Aryan. Built with for the Web.</p>
     </footer>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- JS Link -->
     <script src="script.js"></script>
