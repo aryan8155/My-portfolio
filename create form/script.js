@@ -40,30 +40,7 @@ function typeEffect() {
 
 document.addEventListener('DOMContentLoaded', typeEffect);
 
-// 3. Dark Mode Toggle
-const themeBtn = document.getElementById('theme-btn');
-const body = document.body;
-
-themeBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    const icon = themeBtn.querySelector('i');
-    
-    if (body.classList.contains('dark-theme')) {
-        icon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        icon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-    }
-});
-
-// Check Local Storage for Theme
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-theme');
-    themeBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-}
-
-// 4. Scroll Reveal Animation
+// 3. Scroll Reveal Animation
 function reveal() {
     const reveals = document.querySelectorAll('.reveal');
     reveals.forEach(el => {
@@ -78,7 +55,7 @@ function reveal() {
 window.addEventListener('scroll', reveal);
 reveal();
 
-// 5. Contact Form with EmailJS
+// 4. Contact Form with EmailJS
 const EMAILJS_CONFIG = {
     publicKey: 'n3Jep_eUlAhWjmDEx',
     serviceId: 'service_p8iz7uv',
@@ -110,12 +87,12 @@ contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!window.emailjs) {
-        setFormMessage('Email service load nahi hui. Internet check karke dubara try karo.', 'error');
+        setFormMessage('Email service could not load. Please check your internet connection and try again.', 'error');
         return;
     }
 
     if (!isEmailJsConfigured()) {
-        setFormMessage('EmailJS keys set nahi hain. script.js mein publicKey, serviceId, templateId update karo.', 'error');
+        setFormMessage('EmailJS keys are not configured. Please update publicKey, serviceId, and templateId in script.js.', 'error');
         return;
     }
 
@@ -129,7 +106,7 @@ contactForm.addEventListener('submit', async (e) => {
 
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    setFormMessage('Message bheja ja raha hai...', 'info');
+    setFormMessage('Sending your message...', 'info');
 
     try {
         await emailjs.send(
@@ -138,10 +115,10 @@ contactForm.addEventListener('submit', async (e) => {
             templateParams
         );
 
-        setFormMessage('Success! Message send ho gaya. Main jaldi reply karunga.', 'success');
+        setFormMessage('Success! Your message has been sent. I will get back to you soon.', 'success');
         contactForm.reset();
     } catch (error) {
-        setFormMessage('Oops! Message send nahi ho paya. Thodi der baad phir try karo.', 'error');
+        setFormMessage('Oops! Your message could not be sent. Please try again in a moment.', 'error');
         console.error('EmailJS Error:', error);
     } finally {
         submitBtn.disabled = false;
